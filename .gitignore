@@ -1,0 +1,12 @@
+# -*- mode: gitignore; -*-
+#
+# .gitignore
+#
+
+# Emacs temporary files
+*~
+.*~
+\#*#
+
+# Guile object files
+*.go
