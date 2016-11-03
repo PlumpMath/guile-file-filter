@@ -1,7 +1,7 @@
 (define-module (file filter)
   #:use-module (ice-9 optargs))
 
-(define (with-input-port input proc)
+(define (call-with-input-port input proc)
   (call-with-values
       (lambda ()
         (proc input))
@@ -10,7 +10,7 @@
             (close-input-port input))
       (apply values vals))))
 
-(define (with-output-port output proc)
+(define (call-with-output-port output proc)
   (call-with-values
       (lambda ()
         (proc output))
@@ -31,6 +31,6 @@
       (when (string? output)
             (set! output (open-output-file output))))
 
-  (with-input-port input (lambda (input)
-                           (with-output-port output (lambda (output)
-                                                      (proc input output))))))
+  (call-with-input-port input (lambda (input)
+                                (call-with-output-port output (lambda (output)
+                                                                (proc input output))))))
